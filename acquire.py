@@ -69,7 +69,9 @@ def prep_titanic(df):
     return df
 
 def prep_telco(df):
+    df["total_charges"] = pd.to_numeric(df["total_charges"], errors="coerce")
     df = df.drop_duplicates()
+    df = df.dropna()
     cols_to_drop = ['contract_type_id', 'payment_type_id', 'internet_service_type_id', 'online_security', 'online_backup', 'device_protection', 'tech_support', 'streaming_tv','streaming_movies', 'paperless_billing']
     df = df.drop(columns = cols_to_drop)
     df_dummy = pd.get_dummies(df[['gender', 'partner', 'dependents', 'phone_service', 'multiple_lines', 'churn']], dummy_na=False, drop_first=[True,True,True,True,True,True])
