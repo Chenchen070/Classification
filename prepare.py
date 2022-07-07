@@ -1,10 +1,26 @@
-def prep_iris(df):
+import numpy as np
+import pandas as pd
+
+def clean_iris_data(df):
     df = df.drop(columns = ['species_id', 'measurement_id'])
     df = df.rename(columns = {'species_name': 'species'})
     dummy_df = pd.get_dummies(df[['species']], dummy_na= False, drop_first=True)
     df = pd.concat([df, dummy_df], axis = 1)
     
     return df
+
+def split_iris_data(df):
+    '''
+    Takes in a dataframe and return train, validate, test subset dataframes
+    '''
+    train_validate, test = train_test_split(df, test_size = .2, random_state=123, stratify=df.survived)
+    train, validate = train_test_split(train_validate, test_size=.25, random_state=123, stratify=train.survived)
+    return train, validate, test
+
+def prep_iris_data(df):
+    df = clean_iris_data(df)
+    train, validate, test = split_iris_data(df)
+    return train, validate, test
 
 # ----------------------------------------------------
 
