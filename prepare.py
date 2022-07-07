@@ -14,7 +14,7 @@ def split_iris_data(df):
     Takes in a dataframe and return train, validate, test subset dataframes
     '''
     train_validate, test = train_test_split(df, test_size = .2, random_state=123, stratify=df.survived)
-    train, validate = train_test_split(train_validate, test_size=.25, random_state=123, stratify=train.survived)
+    train, validate = train_test_split(train_validate, test_size=.25, random_state=123, stratify=train_validate.survived)
     return train, validate, test
 
 def prep_iris_data(df):
@@ -37,7 +37,7 @@ def split_titanic_data(df):
     Takes in a dataframe and return train, validate, test subset dataframes
     '''
     train_validate, test = train_test_split(df, test_size = .2, random_state=123, stratify=df.survived)
-    train, validate = train_test_split(train_validate, test_size=.25, random_state=123, stratify=train.survived)
+    train, validate = train_test_split(train_validate, test_size=.25, random_state=123, stratify=train_validate.survived)
     return train, validate, test
 
 def prep_titanic_data(df):
